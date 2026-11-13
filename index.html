@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Яна Самойлова — тренер</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Rubik:wght@300;400;500&family=Fraunces:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--p:#f6f5f2;--k:#111113;--g:#77777c;--s:#e9e7e2;--ln:#d6d3cc;--t:#2a5254;--mint:#eaf3f2;--gold:#b08a4a;--tx:#3d3d40}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -13,12 +13,12 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;backgroun
 .v{display:none;padding:26px 24px 130px;max-width:560px;margin:0 auto}.v.on{display:block}
 .v.on>*{animation:up .45s both}.v.on>*:nth-child(2){animation-delay:.04s}.v.on>*:nth-child(3){animation-delay:.08s}.v.on>*:nth-child(4){animation-delay:.12s}.v.on>*:nth-child(5){animation-delay:.16s}.v.on>*:nth-child(6){animation-delay:.2s}.v.on>*:nth-child(n+7){animation-delay:.24s}
 @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.brand{font:300 40px/1.05 Rubik;letter-spacing:-.03em}.brand b{font:500 30px Rubik;letter-spacing:.12em;text-transform:uppercase}.brand b i{font-style:normal;color:var(--t)}
+.brand{font:300 46px/.95 Rubik;letter-spacing:-.04em;white-space:nowrap}.brand em,h2 em{font-family:Fraunces,serif;font-style:italic;font-weight:300;color:var(--t);letter-spacing:-.03em}
 .sub{margin-top:16px;font:500 10.5px Jost;letter-spacing:.28em;text-transform:uppercase;color:var(--g);padding-bottom:24px;border-bottom:1.5px solid var(--k)}
 .m{display:flex;align-items:center;gap:16px;width:100%;text-align:left;padding:20px 0;border-bottom:1px solid var(--s)}
 .ic{flex:none;width:48px;height:48px;border-radius:14px;background:var(--mint);display:grid;place-items:center}
 .ic svg{width:24px;height:24px;stroke:var(--t);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.m .tx{flex:1;min-width:0}.m b{display:block;font:400 23px/1.2 Rubik;letter-spacing:-.01em}.m small{display:block;margin-top:4px;font:300 13.5px Jost;color:var(--g)}
+.m .tx{flex:1;min-width:0}.m b{display:block;font:300 25px/1.15 Rubik;letter-spacing:-.03em}.m small{display:block;margin-top:4px;font:300 13.5px Jost;color:var(--g)}
 .m>svg{flex:none;width:22px;height:22px;stroke:var(--g);fill:none;stroke-width:1.4}
 .m.hl b{color:var(--t)}.m.hl .ic{background:var(--t)}.m.hl .ic svg{stroke:#fff}
 .m:active{opacity:.6}
@@ -27,10 +27,10 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;backgroun
 .xb:active{background:#eceae5}
 .xb svg{width:22px;height:22px;stroke:var(--k);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}.xb b{display:block;font:400 15px/1.2 Jost}.xb small{display:block;font:300 12px Jost;color:var(--g)}
 .top{font:500 10.5px Jost;letter-spacing:.28em;text-transform:uppercase;color:var(--g)}
-h2{font:300 32px/1.1 Rubik;letter-spacing:-.03em;margin:10px 0 22px}
+h2{font:300 36px/.98 Rubik;letter-spacing:-.04em;margin:10px 0 22px}
 h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin:30px 0 6px}
 .days{display:flex;gap:8px;overflow-x:auto;margin:0 -24px 18px;padding:0 24px 4px;scrollbar-width:none}.days::-webkit-scrollbar{display:none}
-.d{flex:none;width:56px;padding:9px 0;border:1px solid var(--ln);border-radius:14px;text-align:center}.d small{display:block;font:500 10px Jost;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.d b{font:300 22px Rubik}
+.d{flex:none;width:56px;padding:9px 0;border:1px solid var(--ln);border-radius:14px;text-align:center}.d small{display:block;font:500 10px Jost;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.d b{font:300 22px Rubik;letter-spacing:-.02em}
 .d.on{background:var(--k);border-color:var(--k);color:#fff}.d.on small{color:#aaa}.d:disabled{opacity:.28}
 .hs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-height:44px}
 .h{padding:11px 0;border:1px solid var(--ln);border-radius:12px;text-align:center;font:400 15px Jost}.h.on{background:var(--t);border-color:var(--t);color:#fff}.h:disabled{color:#c3c0b9;text-decoration:line-through;border-style:dashed}
@@ -46,14 +46,14 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 .about{display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:center;margin-bottom:8px}
 .about .ph{height:150px;border-radius:16px;background:url(https://i.wfolio.ru/x/L_t86Cg0yc0c5wZfIMt076cc1ywi1J83/NP5NRCahyctDU4-SvYH4U0cdkgd3Mhr-/kKLIMkJ6M6jLEbNSf0Lc7koX-PctDakt/8AW1_4fuBC8OyKHGO2Y_Sc0C0d8hJT6w/Gxum_BCeh8uFBazEpu1mbqkNP1MfEOYR/btjr7L6s0Y4kdW_k8JvxP9ly-dbA54ju.png) center 15%/cover #dfe9e8}
 .about p,.lead{font:300 15px/1.6 Jost;color:var(--tx)}
-.n{display:flex;gap:16px;padding:15px 0;border-top:1px solid var(--s)}.n i{font:300 21px Rubik;color:var(--gold);font-style:normal;width:28px;flex:none}.n b{display:block;font:400 17px Rubik}.n p{font:300 14px/1.5 Jost;color:var(--g)}
-.pr{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0;border-top:1px solid var(--s)}.pr b{font:400 17px Rubik}.pr p{font:300 13.5px Jost;color:var(--g)}.pr span{font:300 20px Rubik;white-space:nowrap}
+.n{display:flex;gap:16px;padding:15px 0;border-top:1px solid var(--s)}.n i{font:italic 300 20px Fraunces,serif;color:var(--g);font-style:normal;width:28px;flex:none}.n b{display:block;font:400 17px Rubik;letter-spacing:-.01em}.n p{font:300 14px/1.5 Jost;color:var(--g)}
+.pr{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0;border-top:1px solid var(--s)}.pr b{font:400 17px Rubik}.pr p{font:300 13.5px Jost;color:var(--g)}.pr span{font:300 20px Rubik;letter-spacing:-.02em;white-space:nowrap}
 .ok{padding-top:40px}.ok .c{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--k);display:grid;place-items:center;margin-bottom:24px}.ok .c svg{width:28px;stroke:var(--k);fill:none;stroke-width:1.6}
 .ok p{font:300 16px/1.6 Jost;color:var(--tx);margin-bottom:26px}
 </style></head><body>
 
 <section class="v on" id="home">
-  <div class="brand">Яна <b>Самойл<i>о</i>ва</b></div>
+  <div class="brand">Яна <em>Самойлова</em></div>
   <div class="sub">Персональный тренер · DDX UNO · Казань</div>
   <button class="m" onclick="go('about')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6.5 7v10M17.5 7v10M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/></svg></span><span class="tx"><b>Обо мне и методика</b><small>10+ лет в фитнесе · пульсовые зоны · питание</small></span><svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button>
   <button class="m hl" onclick="go('book')"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span><span class="tx"><b>Запись онлайн</b><small id="near">Свободные окна на 3 недели</small></span><svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button>
@@ -68,7 +68,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 
 <section class="v" id="about">
   <div class="top">Обо мне и методика</div>
-  <h2>Яна Самойлова</h2>
+  <h2>Яна <em>Самойлова</em></h2>
   <div class="about"><div class="ph"></div><p>Персональный тренер в DDX UNO, Казань. Более 10 лет в фитнесе. Считаю не подходы, а зоны пульса и реакцию нервной системы.</p></div>
   <h3>Методика</h3>
   <div class="n"><i>01</i><div><b>Персональный подход</b><p>Программа под вашу физиологию, цели и уровень подготовки.</p></div></div>
@@ -81,7 +81,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 
 <section class="v" id="price">
   <div class="top">Цены и абонементы</div>
-  <h2>Стоимость<br>тренировок</h2>
+  <h2>Стоимость<br><em>тренировок</em></h2>
   <p class="lead" id="priceLead">Актуальные цены и абонементы Яна пришлёт в личном сообщении — напишите, какой формат вам интересен.</p>
   <div id="priceList"></div>
   <div class="go"><button class="btn" onclick="go('book')">Записаться</button><button class="btn o" onclick="ext(TG_YANA)">Узнать цену у Яны</button></div>
@@ -89,7 +89,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 
 <section class="v" id="book">
   <div class="top">Запись на тренировку</div>
-  <h2>Выберите день<br>и время</h2>
+  <h2>Выберите день<br>и <em>время</em></h2>
   <div class="days" id="days"></div>
   <div class="hs" id="hours"><div class="note">Загружаю расписание…</div></div>
   <label class="f" id="fName"><small>Имя</small><input id="iName" maxlength="50" autocomplete="name" placeholder="Как к вам обращаться"></label><div class="err" id="eName"></div>
@@ -102,7 +102,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 <section class="v" id="done"><div class="ok">
   <div class="c"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
   <div class="top">Заявка отправлена</div>
-  <h2>До встречи<br>в зале</h2>
+  <h2>До встречи<br>в <em>зале</em></h2>
   <p><span id="doneWhen"></span><br>DDX UNO, ул. Сибгата Хакима, 62.<br>Яна свяжется с вами для подтверждения.</p>
   <button class="btn" onclick="ext(icsUrl)">В календарь</button><button class="btn o" onclick="ext(YMAPS)">Маршрут до зала</button><button class="btn o" onclick="go('home')">На главную</button>
 </div></section>
