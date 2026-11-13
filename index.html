@@ -38,7 +38,7 @@ h2{font:300 36px/.98 Rubik;letter-spacing:-.04em;margin:10px 0 22px}
 h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin:30px 0 6px}
 .days{display:flex;gap:8px;overflow-x:auto;margin:0 -24px 18px;padding:0 24px 4px;scrollbar-width:none}.days::-webkit-scrollbar{display:none}
 .d{flex:none;width:56px;padding:9px 0;border:1px solid var(--ln);border-radius:14px;text-align:center}.d small{display:block;font:500 10px Jost;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.d b{font:300 22px Rubik;letter-spacing:-.02em}
-.d.on{background:var(--k);border-color:var(--k);color:#fff}.d.on small{color:#aaa}.d:disabled{opacity:.28}
+.d{position:relative;padding-bottom:14px}.d i{position:absolute;left:0;right:0;bottom:6px;margin:auto;width:5px;height:5px;border-radius:50%;background:var(--t)}.d.on{background:var(--k);border-color:var(--k);color:#fff}.d.on small{color:#aaa}.d.on i{background:#fff}.d.full,.d.off{cursor:default}.d.full b,.d.off b{color:#b9b6af}.d.full small,.d.off small{color:#c9c6bf}.d.full i{width:auto;height:auto;background:none;font:500 8px Jost;letter-spacing:.12em;text-transform:uppercase;color:#b9b6af;font-style:normal;bottom:4px}.d.off{border-style:dashed;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(17,17,19,.045) 6px 7px)}.d.off i{display:none}.lg{display:flex;gap:16px;margin:-6px 0 18px;font:300 12px Jost;color:var(--g)}.lg span{display:flex;align-items:center;gap:6px}.lg i{width:6px;height:6px;border-radius:50%;background:var(--t)}.lg .z{width:12px;height:12px;border-radius:4px;border:1px dashed #b9b6af;background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(17,17,19,.08) 3px 4px)}.lg .f2{font:500 8px Jost;letter-spacing:.1em;color:#b9b6af;text-transform:uppercase}.cl{margin-top:6px;padding:26px 22px;border-radius:20px;background:#fff;border:1px solid var(--s);text-align:left}.cl .ci{width:52px;height:52px;border-radius:16px;background:var(--mint);display:grid;place-items:center;margin-bottom:18px}.cl .ci svg{width:26px;stroke:var(--t);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.cl h4{font:300 24px/1.15 Rubik;letter-spacing:-.03em}.cl h4 em{font-family:Fraunces,serif;font-style:italic;color:var(--t)}.cl p{margin:10px 0 20px;font:300 14.5px/1.55 Jost;color:var(--tx)}.cl .btn{min-height:50px}#book.closed #form,#book.closed .go,#book.closed #hours,#book.closed .lg{display:none}#book:not(.closed) .cl{display:none}
 .hs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-height:44px}
 .h{padding:11px 0;border:1px solid var(--ln);border-radius:12px;text-align:center;font:400 15px Jost}.h.on{background:var(--t);border-color:var(--t);color:#fff}.h:disabled{color:#c3c0b9;text-decoration:line-through;border-style:dashed}
 .note{font:300 14px Jost;color:var(--g);grid-column:1/-1}
@@ -100,12 +100,16 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
   <div class="top">Запись на тренировку</div>
   <h2>Выберите день<br>и <em>время</em></h2>
   <div class="days" id="days"></div>
+  <div class="lg"><span><i></i>есть окна</span><span><b class="f2">занято</b>всё занято</span><span><b class="z"></b>нет записи</span></div>
+  <div class="cl"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></svg></div><h4>Запись пока <em>закрыта</em></h4><p>На ближайшие три недели свободных окон нет. Напишите Яне — она подберёт время или сообщит, когда откроет новые даты.</p><button class="btn" onclick="ext(TG_YANA)">Написать Яне в Telegram</button><button class="btn o" onclick="ext('https://wa.me/79625615737')">WhatsApp</button></div>
   <div class="hs" id="hours"><div class="note">Загружаю расписание…</div></div>
+  <div id="form">
   <label class="f" id="fName"><small>Имя</small><input id="iName" maxlength="50" enterkeyhint="next" autocomplete="name" placeholder="Как к вам обращаться"><button type="button" class="clr" tabindex="-1" aria-label="Очистить"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.2 12.8-1.4 1.4L12 13.4l-2.8 2.8-1.4-1.4 2.8-2.8-2.8-2.8 1.4-1.4 2.8 2.8 2.8-2.8 1.4 1.4-2.8 2.8z"/></svg></button></label><div class="err" id="eName"></div>
   <div class="seg"><button type="button" id="mTg" onclick="mode('tg')">Telegram</button><button type="button" id="mPh" onclick="mode('ph')">Телефон</button></div>
   <label class="f" id="fCon"><small id="lCon">Telegram</small><input id="iCon" maxlength="40" enterkeyhint="next" autocapitalize="off" spellcheck="false"><button type="button" class="clr" tabindex="-1" aria-label="Очистить"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.2 12.8-1.4 1.4L12 13.4l-2.8 2.8-1.4-1.4 2.8-2.8-2.8-2.8 1.4-1.4 2.8 2.8 2.8-2.8 1.4 1.4-2.8 2.8z"/></svg></button></label><div class="err" id="eCon"></div>
   <label class="f"><small>Комментарий</small><textarea id="iCom" enterkeyhint="done" rows="2" maxlength="500" placeholder="Цель, опыт — по желанию"></textarea><button type="button" class="clr" tabindex="-1" aria-label="Очистить"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.2 12.8-1.4 1.4L12 13.4l-2.8 2.8-1.4-1.4 2.8-2.8-2.8-2.8 1.4-1.4 2.8 2.8 2.8-2.8 1.4 1.4-2.8 2.8z"/></svg></button></label>
   <label class="chk"><input type="checkbox" id="iOk"><span>Согласен(на) на обработку персональных данных по <a href="#" onclick="ext('https://yanapro.ru/legal-privacy');return false">Политике конфиденциальности</a></span></label>
+  </div>
   <div class="go"><button class="btn" id="send" disabled onclick="send()">Выберите время</button></div>
 </section>
 
@@ -161,13 +165,13 @@ async function load(){try{const r=await fetch(API_URL+'?action=slots');const j=a
   renderDays();nearest()}
 function days21(){const a=[],t=new Date();t.setHours(0,0,0,0);for(let i=0;i<21;i++){const d=new Date(t);d.setDate(t.getDate()+i);a.push(d)}return a}
 function renderDays(){const box=$('days');box.innerHTML='';let first=null;
-  days21().forEach(d=>{const ok=freeTimes(d).some(x=>!x.b);const b=document.createElement('button');b.className='d';b.disabled=!ok;
-    b.innerHTML=`<small>${DOW[d.getDay()]}</small><b>${d.getDate()}</b>`;b.onclick=()=>pickDay(d,b);box.appendChild(b);if(ok&&!first)first=[d,b]});
-  if(first)pickDay(...first);else{selD=selT=null;upd();$('hours').innerHTML='<div class="note">Свободных окон на ближайшие 3 недели нет — напишите Яне.</div>'}}
+  days21().forEach(d=>{const ft=freeTimes(d),ok=ft.some(x=>!x.b);const b=document.createElement('button');b.className='d'+(ok?'':ft.length?' full':' off');b.disabled=!ok;
+    b.innerHTML=`<small>${DOW[d.getDay()]}</small><b>${d.getDate()}</b><i>${ok?'':ft.length?'занято':''}</i>`;b.onclick=()=>pickDay(d,b);box.appendChild(b);if(ok&&!first)first=[d,b]});
+  $('book').classList.toggle('closed',!first);if(first)pickDay(...first);else{selD=selT=null;upd()}}
 function pickDay(d,b){selD=d;selT=null;document.querySelectorAll('.d').forEach(x=>x.classList.toggle('on',x===b));
   const h=$('hours');h.innerHTML='';freeTimes(d).forEach(x=>{const e=document.createElement('button');e.className='h';e.textContent=x.t;e.disabled=x.b;
     e.onclick=()=>{selT=x.t;document.querySelectorAll('.h').forEach(y=>y.classList.toggle('on',y===e));upd()};h.appendChild(e)});upd()}
-function nearest(){for(const d of days21()){const f=freeTimes(d).find(x=>!x.b);if(f){const t=new Date();t.setHours(0,0,0,0);const diff=Math.round((d-t)/864e5);
+function nearest(){$('near').textContent='Запись пока закрыта — напишите Яне';for(const d of days21()){const f=freeTimes(d).find(x=>!x.b);if(f){const t=new Date();t.setHours(0,0,0,0);const diff=Math.round((d-t)/864e5);
   $('near').textContent='Ближайшее свободное: '+(diff===0?'сегодня':diff===1?'завтра':DOW[d.getDay()]+' '+d.getDate()+' '+MON[d.getMonth()])+', '+f.t;return}}}
 function upd(){const btn=$('send');const ok=selD&&selT;btn.disabled=!ok;btn.textContent=ok?`Записаться · ${DOW[selD.getDay()]} ${selD.getDate()}, ${selT}`:'Выберите время'}
 function err(f,e,t){$(e).textContent=t;$(f).classList.toggle('bad',!!t);if(t){const el=$(f);el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');try{tg&&tg.HapticFeedback.notificationOccurred('error')}catch(x){}}}
