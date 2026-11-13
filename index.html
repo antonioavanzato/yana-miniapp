@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Яна Самойлова — тренер</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--p:#f6f5f2;--k:#111113;--g:#77777c;--s:#e9e7e2;--ln:#d6d3cc;--t:#2a5254;--mint:#eaf3f2;--gold:#b08a4a;--tx:#3d3d40}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--p)}
+body{color:var(--k);font:400 16px/1.5 Jost,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.v{display:none;padding:26px 24px 130px;max-width:560px;margin:0 auto}.v.on{display:block}
+.v.on>*{animation:up .45s both}.v.on>*:nth-child(2){animation-delay:.04s}.v.on>*:nth-child(3){animation-delay:.08s}.v.on>*:nth-child(4){animation-delay:.12s}.v.on>*:nth-child(5){animation-delay:.16s}.v.on>*:nth-child(6){animation-delay:.2s}.v.on>*:nth-child(n+7){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.brand{font:300 40px/1.05 Rubik;letter-spacing:-.03em}.brand b{font:500 30px Rubik;letter-spacing:.12em;text-transform:uppercase}.brand b i{font-style:normal;color:var(--t)}
+.sub{margin-top:16px;font:500 10.5px Jost;letter-spacing:.28em;text-transform:uppercase;color:var(--g);padding-bottom:24px;border-bottom:1.5px solid var(--k)}
+.m{display:flex;align-items:center;gap:16px;width:100%;text-align:left;padding:20px 0;border-bottom:1px solid var(--s)}
+.ic{flex:none;width:48px;height:48px;border-radius:14px;background:var(--mint);display:grid;place-items:center}
+.ic svg{width:24px;height:24px;stroke:var(--t);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.m .tx{flex:1;min-width:0}.m b{display:block;font:400 23px/1.2 Rubik;letter-spacing:-.01em}.m small{display:block;margin-top:4px;font:300 13.5px Jost;color:var(--g)}
+.m>svg{flex:none;width:22px;height:22px;stroke:var(--g);fill:none;stroke-width:1.4}
+.m.hl b{color:var(--t)}.m.hl .ic{background:var(--t)}.m.hl .ic svg{stroke:#fff}
+.m:active{opacity:.6}
+.ex{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.xb{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--ln);border-radius:16px;text-align:left}
+.xb:active{background:#eceae5}
+.xb svg{width:22px;height:22px;stroke:var(--k);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}.xb b{display:block;font:400 15px/1.2 Jost}.xb small{display:block;font:300 12px Jost;color:var(--g)}
+.top{font:500 10.5px Jost;letter-spacing:.28em;text-transform:uppercase;color:var(--g)}
+h2{font:300 32px/1.1 Rubik;letter-spacing:-.03em;margin:10px 0 22px}
+h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin:30px 0 6px}
+.days{display:flex;gap:8px;overflow-x:auto;margin:0 -24px 18px;padding:0 24px 4px;scrollbar-width:none}.days::-webkit-scrollbar{display:none}
+.d{flex:none;width:56px;padding:9px 0;border:1px solid var(--ln);border-radius:14px;text-align:center}.d small{display:block;font:500 10px Jost;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.d b{font:300 22px Rubik}
+.d.on{background:var(--k);border-color:var(--k);color:#fff}.d.on small{color:#aaa}.d:disabled{opacity:.28}
+.hs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-height:44px}
+.h{padding:11px 0;border:1px solid var(--ln);border-radius:12px;text-align:center;font:400 15px Jost}.h.on{background:var(--t);border-color:var(--t);color:#fff}.h:disabled{color:#c3c0b9;text-decoration:line-through;border-style:dashed}
+.note{font:300 14px Jost;color:var(--g);grid-column:1/-1}
+.f{display:block;margin-top:14px;padding:10px 0 8px;border-bottom:1px solid var(--ln)}.f small{display:block;font:500 10px Jost;letter-spacing:.22em;text-transform:uppercase;color:var(--g)}
+.f input,.f textarea{width:100%;border:0;background:none;outline:0;font:400 17px Jost;color:var(--k);padding:4px 0;resize:none}
+.f.bad{border-color:#c8321f}.err{font:300 12.5px Jost;color:#c8321f;margin-top:4px}
+.chk{display:flex;gap:10px;margin-top:18px;font:300 13px/1.45 Jost;color:var(--g)}.chk input{flex:none;width:18px;height:18px;accent-color:var(--k);margin-top:1px}.chk a{text-decoration:underline}
+.go{position:fixed;left:0;right:0;bottom:0;padding:14px 24px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(rgba(246,245,242,0),var(--p) 35%)}
+.go>*{max-width:512px;margin-left:auto;margin-right:auto}
+.btn{display:flex;width:100%;justify-content:center;align-items:center;min-height:54px;border-radius:99px;background:var(--k);color:#fff;font:500 12px Jost;letter-spacing:.18em;text-transform:uppercase}
+.btn:disabled{opacity:.35}.btn.o{background:none;color:var(--k);border:1px solid var(--ln);margin-top:10px}
+.about{display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:center;margin-bottom:8px}
+.about .ph{height:150px;border-radius:16px;background:url(https://i.wfolio.ru/x/L_t86Cg0yc0c5wZfIMt076cc1ywi1J83/NP5NRCahyctDU4-SvYH4U0cdkgd3Mhr-/kKLIMkJ6M6jLEbNSf0Lc7koX-PctDakt/8AW1_4fuBC8OyKHGO2Y_Sc0C0d8hJT6w/Gxum_BCeh8uFBazEpu1mbqkNP1MfEOYR/btjr7L6s0Y4kdW_k8JvxP9ly-dbA54ju.png) center 15%/cover #dfe9e8}
+.about p,.lead{font:300 15px/1.6 Jost;color:var(--tx)}
+.n{display:flex;gap:16px;padding:15px 0;border-top:1px solid var(--s)}.n i{font:300 21px Rubik;color:var(--gold);font-style:normal;width:28px;flex:none}.n b{display:block;font:400 17px Rubik}.n p{font:300 14px/1.5 Jost;color:var(--g)}
+.pr{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0;border-top:1px solid var(--s)}.pr b{font:400 17px Rubik}.pr p{font:300 13.5px Jost;color:var(--g)}.pr span{font:300 20px Rubik;white-space:nowrap}
+.ok{padding-top:40px}.ok .c{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--k);display:grid;place-items:center;margin-bottom:24px}.ok .c svg{width:28px;stroke:var(--k);fill:none;stroke-width:1.6}
+.ok p{font:300 16px/1.6 Jost;color:var(--tx);margin-bottom:26px}
+</style></head><body>
+
+<section class="v on" id="home">
+  <div class="brand">Яна <b>Самойл<i>о</i>ва</b></div>
+  <div class="sub">Персональный тренер · DDX UNO · Казань</div>
+  <button class="m" onclick="go('about')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6.5 7v10M17.5 7v10M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/></svg></span><span class="tx"><b>Обо мне и методика</b><small>10+ лет в фитнесе · пульсовые зоны · питание</small></span><svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button>
+  <button class="m hl" onclick="go('book')"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span><span class="tx"><b>Запись онлайн</b><small id="near">Свободные окна на 3 недели</small></span><svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button>
+  <button class="m" onclick="go('price')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3.5 12.5V5a1.5 1.5 0 0 1 1.5-1.5h7.5l8 8a1.5 1.5 0 0 1 0 2.1l-6.4 6.4a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8.5" cy="8.5" r="1.6"/></svg></span><span class="tx"><b>Цены и абонементы</b><small>Разовые тренировки · пакеты · питание</small></span><svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button>
+  <div class="ex">
+    <button class="xb" onclick="share()"><svg viewBox="0 0 24 24"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg><span><b>Поделиться</b><small>с другом</small></span></button>
+    <button class="xb" onclick="ext(INSTAGRAM)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg><span><b>Instagram</b><small>Яна в соцсетях</small></span></button>
+    <button class="xb" onclick="ext(YMAPS)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><b>Яндекс Карты</b><small>как проехать</small></span></button>
+    <button class="xb" onclick="ext(GIS)"><svg viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15m6-12v15"/></svg><span><b>2ГИС</b><small>как проехать</small></span></button>
+  </div>
+</section>
+
+<section class="v" id="about">
+  <div class="top">Обо мне и методика</div>
+  <h2>Яна Самойлова</h2>
+  <div class="about"><div class="ph"></div><p>Персональный тренер в DDX UNO, Казань. Более 10 лет в фитнесе. Считаю не подходы, а зоны пульса и реакцию нервной системы.</p></div>
+  <h3>Методика</h3>
+  <div class="n"><i>01</i><div><b>Персональный подход</b><p>Программа под вашу физиологию, цели и уровень подготовки.</p></div></div>
+  <div class="n"><i>02</i><div><b>Техника и биомеханика</b><p>Безопасно для суставов и спины — и эффективно.</p></div></div>
+  <div class="n"><i>03</i><div><b>Пульсовые зоны</b><p>Прогресс без перетренированности и выгорания.</p></div></div>
+  <div class="n"><i>04</i><div><b>Питание без запретов</b><p>Баланс БЖУ и привычки, которые остаются с вами.</p></div></div>
+  <div class="n"><i>05</i><div><b>Новичкам и подросткам 16+</b><p>Мягкий старт и постепенная нагрузка.</p></div></div>
+  <div class="go"><button class="btn" onclick="go('book')">Записаться</button></div>
+</section>
+
+<section class="v" id="price">
+  <div class="top">Цены и абонементы</div>
+  <h2>Стоимость<br>тренировок</h2>
+  <p class="lead" id="priceLead">Актуальные цены и абонементы Яна пришлёт в личном сообщении — напишите, какой формат вам интересен.</p>
+  <div id="priceList"></div>
+  <div class="go"><button class="btn" onclick="go('book')">Записаться</button><button class="btn o" onclick="ext(TG_YANA)">Узнать цену у Яны</button></div>
+</section>
+
+<section class="v" id="book">
+  <div class="top">Запись на тренировку</div>
+  <h2>Выберите день<br>и время</h2>
+  <div class="days" id="days"></div>
+  <div class="hs" id="hours"><div class="note">Загружаю расписание…</div></div>
+  <label class="f" id="fName"><small>Имя</small><input id="iName" maxlength="50" autocomplete="name" placeholder="Как к вам обращаться"></label><div class="err" id="eName"></div>
+  <label class="f" id="fCon"><small>Telegram или телефон</small><input id="iCon" maxlength="40" autocapitalize="off" spellcheck="false" placeholder="@username или +7…"></label><div class="err" id="eCon"></div>
+  <label class="f"><small>Комментарий</small><textarea id="iCom" rows="2" maxlength="500" placeholder="Цель, опыт — по желанию"></textarea></label>
+  <label class="chk"><input type="checkbox" id="iOk"><span>Согласен(на) на обработку персональных данных по <a href="#" onclick="ext('https://yanapro.ru/legal-privacy');return false">Политике конфиденциальности</a></span></label>
+  <div class="go"><button class="btn" id="send" disabled onclick="send()">Выберите время</button></div>
+</section>
+
+<section class="v" id="done"><div class="ok">
+  <div class="c"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+  <div class="top">Заявка отправлена</div>
+  <h2>До встречи<br>в зале</h2>
+  <p><span id="doneWhen"></span><br>DDX UNO, ул. Сибгата Хакима, 62.<br>Яна свяжется с вами для подтверждения.</p>
+  <button class="btn" onclick="ext(icsUrl)">В календарь</button><button class="btn o" onclick="ext(YMAPS)">Маршрут до зала</button><button class="btn o" onclick="go('home')">На главную</button>
+</div></section>
+
+<script>
+/* Тот же публичный эндпоинт и ключ, что и в форме booking.yanapro.ru */
+const API_URL="https://functions.yandexcloud.net/d4e9ib1n9r0dpds2hg6t", API_KEY="2b57e7065469136146474ec815375ca3";
+const BOT_LINK="https://t.me/Yanaproru_bot", TG_YANA="https://t.me/+79625615737";
+const INSTAGRAM="https://www.instagram.com/"; /* TODO: ник Яны */
+const PLACE=encodeURIComponent("DDX UNO, Казань, улица Сибгата Хакима, 62");
+const YMAPS="https://yandex.ru/maps/43/kazan/?text="+PLACE, GIS="https://2gis.ru/kazan/search/"+PLACE;
+/* Цены: [{t:'Разовая тренировка',d:'60 минут',p:'2 000 ₽'}, …] — экран сам покажет список */
+const PRICES=[];
+
+const tg=window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData!==undefined?Telegram.WebApp:null; let cur='home', icsUrl='';
+if(tg){tg.ready();tg.expand();try{tg.setHeaderColor('#f6f5f2');tg.setBackgroundColor('#f6f5f2');tg.setBottomBarColor&&tg.setBottomBarColor('#f6f5f2')}catch(e){}
+  tg.BackButton.onClick(()=>go('home'))}
+const $=id=>document.getElementById(id);
+function swipes(on){try{if(!tg)return;on?tg.enableVerticalSwipes():tg.disableVerticalSwipes()}catch(e){}}
+function go(id){cur=id;document.querySelectorAll('.v').forEach(v=>v.classList.toggle('on',v.id===id));scrollTo(0,0);
+  if(tg){id==='home'||id==='done'?tg.BackButton.hide():tg.BackButton.show()} swipes(id==='home'||id==='done');
+  if(id==='book'&&!loaded)load()}
+function ext(u){if(tg&&tg.openLink)tg.openLink(u);else window.open(u,'_blank')}
+function share(){const u='https://t.me/share/url?url='+encodeURIComponent(BOT_LINK)+'&text='+encodeURIComponent('Яна Самойлова — персональный тренер в DDX UNO, Казань. Запись онлайн');
+  if(tg&&tg.openTelegramLink)tg.openTelegramLink(u);else window.open(u,'_blank')}
+/* жест «назад» от левого края на внутренних экранах */
+(function(){let x0=null,y0=0;addEventListener('touchstart',e=>{const t=e.touches[0];x0=(cur!=='home'&&cur!=='done'&&t.clientX<28)?t.clientX:null;y0=t.clientY},{passive:true});
+  addEventListener('touchend',e=>{if(x0===null)return;const t=e.changedTouches[0];if(t.clientX-x0>70&&Math.abs(t.clientY-y0)<60)go('home');x0=null},{passive:true})})();
+
+if(PRICES.length){$('priceLead').textContent='Тренировки проходят в DDX UNO, ул. Сибгата Хакима, 62.';
+  $('priceList').innerHTML=PRICES.map(x=>`<div class="pr"><div><b>${x.t}</b><p>${x.d||''}</p></div><span>${x.p}</span></div>`).join('')}
+
+/* ── запись: правила те же, что на сайте и сервере ── */
+const NAME_RE=/^[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё '\-]{1,49}$/, TG_RE=/^[A-Za-z][A-Za-z0-9_]{4,31}$/;
+function normalizeContact(raw){const v=String(raw||'').trim();if(!v)return null;
+  const t=v.replace(/^(https?:\/\/)?(www\.)?(t|telegram)\.me\//i,'').replace(/^@/,'');
+  if(/[A-Za-z]/.test(t[0]||'')&&TG_RE.test(t)&&!t.endsWith('_'))return '@'+t;
+  if(/[^\d\s()+\-]/.test(v))return null;let d=v.replace(/\D/g,'');
+  if(d.length===11&&d[0]==='8')d='7'+d.slice(1);if(d.length===10)d='7'+d;return /^7[3489]\d{9}$/.test(d)?'+'+d:null}
+let schedule={},busy=new Set(),loaded=false,selD=null,selT=null;
+const DOW=['вс','пн','вт','ср','чт','пт','сб'], MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'], DOWF=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+const ds=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function freeTimes(d){const s=ds(d),now=new Date(),hm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  return (schedule[String(d.getDay())]||[]).map(t=>({t,b:busy.has(s+'|'+t)||(s===ds(now)&&t<=hm)}))}
+async function load(){try{const r=await fetch(API_URL+'?action=slots');const j=await r.json();schedule=j.schedule||{};(j.busy||[]).forEach(s=>s.date&&s.time&&busy.add(s.date+'|'+s.time));loaded=true}
+  catch(e){$('hours').innerHTML='<div class="note">Не удалось загрузить расписание. Проверьте интернет и откройте раздел ещё раз.</div>';return}
+  renderDays();nearest()}
+function days21(){const a=[],t=new Date();t.setHours(0,0,0,0);for(let i=0;i<21;i++){const d=new Date(t);d.setDate(t.getDate()+i);a.push(d)}return a}
+function renderDays(){const box=$('days');box.innerHTML='';let first=null;
+  days21().forEach(d=>{const ok=freeTimes(d).some(x=>!x.b);const b=document.createElement('button');b.className='d';b.disabled=!ok;
+    b.innerHTML=`<small>${DOW[d.getDay()]}</small><b>${d.getDate()}</b>`;b.onclick=()=>pickDay(d,b);box.appendChild(b);if(ok&&!first)first=[d,b]});
+  if(first)pickDay(...first);else{selD=selT=null;upd();$('hours').innerHTML='<div class="note">Свободных окон на ближайшие 3 недели нет — напишите Яне.</div>'}}
+function pickDay(d,b){selD=d;selT=null;document.querySelectorAll('.d').forEach(x=>x.classList.toggle('on',x===b));
+  const h=$('hours');h.innerHTML='';freeTimes(d).forEach(x=>{const e=document.createElement('button');e.className='h';e.textContent=x.t;e.disabled=x.b;
+    e.onclick=()=>{selT=x.t;document.querySelectorAll('.h').forEach(y=>y.classList.toggle('on',y===e));upd()};h.appendChild(e)});upd()}
+function nearest(){for(const d of days21()){const f=freeTimes(d).find(x=>!x.b);if(f){const t=new Date();t.setHours(0,0,0,0);const diff=Math.round((d-t)/864e5);
+  $('near').textContent='Ближайшее свободное: '+(diff===0?'сегодня':diff===1?'завтра':DOW[d.getDay()]+' '+d.getDate()+' '+MON[d.getMonth()])+', '+f.t;return}}}
+function upd(){const btn=$('send');const ok=selD&&selT;btn.disabled=!ok;btn.textContent=ok?`Записаться · ${DOW[selD.getDay()]} ${selD.getDate()}, ${selT}`:'Выберите время'}
+function err(f,e,t){$(e).textContent=t;$(f).classList.toggle('bad',!!t)}
+function say(m){tg&&tg.showAlert?tg.showAlert(m):alert(m)}
+async function send(){const name=$('iName').value.trim().replace(/\s+/g,' '),con=normalizeContact($('iCon').value);let bad=false;
+  if(!NAME_RE.test(name)){err('fName','eName',name?'Имя: только буквы, пробел и дефис':'Введите имя');bad=true}else err('fName','eName','');
+  if(!con){err('fCon','eCon','Укажите ник Telegram (@username) или номер +7');bad=true}else err('fCon','eCon','');
+  if(!bad&&!$('iOk').checked){say('Без согласия на обработку данных запись отправить нельзя');bad=true}
+  if(bad)return;const btn=$('send');btn.disabled=true;btn.textContent='Отправляю…';
+  const date=ds(selD),time=selT,when=`${DOWF[selD.getDay()]}, ${selD.getDate()} ${MON[selD.getMonth()]}, ${time}`;
+  try{const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone:con,comment:$('iCom').value.trim(),date,time,consent:true,key:API_KEY})});
+    if(r.status===409){busy.add(date+'|'+time);say('Это время только что заняли. Выберите другое.');renderDays();return}
+    if(!r.ok){const j=await r.json().catch(()=>({}));if(j.error==='bad_name')err('fName','eName','Проверьте имя');else if(j.error==='bad_contact')err('fCon','eCon','Проверьте Telegram или номер');else throw 0;upd();return}
+    busy.add(date+'|'+time);icsUrl=`${API_URL}?action=ics&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`;
+    $('doneWhen').textContent=when;
+    try{tg&&tg.HapticFeedback.notificationOccurred('success')}catch(e){}
+    $('iCom').value='';renderDays();nearest();go('done')}
+  catch(e){say('Не получилось отправить. Попробуйте ещё раз.');upd()}}
+
+try{const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;if(u){if(u.username)$('iCon').value='@'+u.username;if(u.first_name&&NAME_RE.test(u.first_name))$('iName').value=u.first_name}}catch(e){}
+load();swipes(true);
+if(location.hash.length>1)go(location.hash.slice(1));
+</script>
+</body></html>
