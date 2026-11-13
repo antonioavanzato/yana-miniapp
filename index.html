@@ -129,7 +129,6 @@ function go(id){cur=id;document.querySelectorAll('.v').forEach(v=>v.classList.to
   if(id==='book'&&!loaded)load()}
 function ext(u){if(tg&&tg.openLink)tg.openLink(u);else window.open(u,'_blank')}
 function share(){if(tg&&tg.switchInlineQuery){try{tg.switchInlineQuery('Записаться',['users','groups','channels']);return}catch(e){}}const u='https://t.me/share/url?url='+encodeURIComponent(BOT_LINK)+'&text='+encodeURIComponent('Яна Самойлова — персональный тренер в DDX UNO, Казань. Запись онлайн');if(tg&&tg.openTelegramLink)tg.openTelegramLink(u);else window.open(u,'_blank')}
-  if(tg&&tg.openTelegramLink)tg.openTelegramLink(u);else window.open(u,'_blank')}
 /* жест «назад» от левого края на внутренних экранах */
 (function(){let x0=null,y0=0;addEventListener('touchstart',e=>{const t=e.touches[0];x0=(cur!=='home'&&cur!=='done'&&t.clientX<28)?t.clientX:null;y0=t.clientY},{passive:true});
   addEventListener('touchend',e=>{if(x0===null)return;const t=e.changedTouches[0];if(t.clientX-x0>70&&Math.abs(t.clientY-y0)<60)go('home');x0=null},{passive:true})})();
