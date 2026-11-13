@@ -35,6 +35,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 .hs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-height:44px}
 .h{padding:11px 0;border:1px solid var(--ln);border-radius:12px;text-align:center;font:400 15px Jost}.h.on{background:var(--t);border-color:var(--t);color:#fff}.h:disabled{color:#c3c0b9;text-decoration:line-through;border-style:dashed}
 .note{font:300 14px Jost;color:var(--g);grid-column:1/-1}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:18px;padding:4px;border-radius:14px;background:#ecebe6}.seg button{padding:10px 0;border-radius:10px;font:400 14px Jost;color:var(--g)}.seg button.on{background:#fff;color:var(--k);box-shadow:0 1px 3px rgba(0,0,0,.08)}.seg button:disabled{opacity:.4}
 .f{display:block;margin-top:14px;padding:10px 0 8px;border-bottom:1px solid var(--ln)}.f small{display:block;font:500 10px Jost;letter-spacing:.22em;text-transform:uppercase;color:var(--g)}
 .f input,.f textarea{width:100%;border:0;background:none;outline:0;font:400 17px Jost;color:var(--k);padding:4px 0;resize:none}
 .f.bad{border-color:#c8321f}.err{font:300 12.5px Jost;color:#c8321f;margin-top:4px}
@@ -93,7 +94,8 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
   <div class="days" id="days"></div>
   <div class="hs" id="hours"><div class="note">Загружаю расписание…</div></div>
   <label class="f" id="fName"><small>Имя</small><input id="iName" maxlength="50" autocomplete="name" placeholder="Как к вам обращаться"></label><div class="err" id="eName"></div>
-  <label class="f" id="fCon"><small>Telegram или телефон</small><input id="iCon" maxlength="40" autocapitalize="off" spellcheck="false" placeholder="@username или +7…"></label><div class="err" id="eCon"></div>
+  <div class="seg"><button type="button" id="mTg" onclick="mode('tg')">Telegram</button><button type="button" id="mPh" onclick="mode('ph')">Телефон</button></div>
+  <label class="f" id="fCon"><small id="lCon">Telegram</small><input id="iCon" maxlength="40" autocapitalize="off" spellcheck="false"></label><div class="err" id="eCon"></div>
   <label class="f"><small>Комментарий</small><textarea id="iCom" rows="2" maxlength="500" placeholder="Цель, опыт — по желанию"></textarea></label>
   <label class="chk"><input type="checkbox" id="iOk"><span>Согласен(на) на обработку персональных данных по <a href="#" onclick="ext('https://yanapro.ru/legal-privacy');return false">Политике конфиденциальности</a></span></label>
   <div class="go"><button class="btn" id="send" disabled onclick="send()">Выберите время</button></div>
@@ -163,9 +165,17 @@ function nearest(){for(const d of days21()){const f=freeTimes(d).find(x=>!x.b);i
 function upd(){const btn=$('send');const ok=selD&&selT;btn.disabled=!ok;btn.textContent=ok?`Записаться · ${DOW[selD.getDay()]} ${selD.getDate()}, ${selT}`:'Выберите время'}
 function err(f,e,t){$(e).textContent=t;$(f).classList.toggle('bad',!!t)}
 function say(m){tg&&tg.showAlert?tg.showAlert(m):alert(m)}
+let cmode='tg',tgNick='';
+function fmtPhone(v){v=String(v).trim();let d=v.replace(/\D/g,'');if(/^\+7/.test(v))d=d.slice(1);else if(d.length===11&&/^[78]/.test(d))d=d.slice(1);if(d[0]==='8'&&(d.length===11||(d.length===1&&!fmtPhone.t))){d=d.slice(1);fmtPhone.t=1}if(!d.length&&!/8$/.test(v))fmtPhone.t=0;d=d.slice(0,10);
+  let o='+7';if(d.length)o+=' ('+d.slice(0,3);if(d.length>=3)o+=')';if(d.length>3)o+=' '+d.slice(3,6);if(d.length>6)o+='-'+d.slice(6,8);if(d.length>8)o+='-'+d.slice(8,10);return o}
+function mode(m){cmode=m;const i=$('iCon');$('mTg').classList.toggle('on',m==='tg');$('mPh').classList.toggle('on',m==='ph');err('fCon','eCon','');
+  if(m==='tg'){$('lCon').textContent='Ваш ник в Telegram';i.type='text';i.inputMode='text';i.placeholder='@username';i.value=tgNick?'@'+tgNick:'';i.readOnly=!!tgNick}
+  else{fmtPhone.t=0;$('lCon').textContent='Номер телефона';i.type='tel';i.inputMode='tel';i.readOnly=false;i.placeholder='+7 (9__) ___-__-__';i.value='+7 '}}
+$('iCon').addEventListener('input',e=>{if(cmode!=='ph')return;const i=e.target;i.value=i.value.replace(/\D/g,'').length?fmtPhone(i.value):'+7 '});
+$('iCon').addEventListener('focus',e=>{if(cmode==='ph'&&!e.target.value)e.target.value='+7 '});
 async function send(){const name=$('iName').value.trim().replace(/\s+/g,' '),con=normalizeContact($('iCon').value);let bad=false;
   if(!NAME_RE.test(name)){err('fName','eName',name?'Имя: только буквы, пробел и дефис':'Введите имя');bad=true}else err('fName','eName','');
-  if(!con){err('fCon','eCon','Укажите ник Telegram (@username) или номер +7');bad=true}else err('fCon','eCon','');
+  if(!con||(cmode==='ph'&&con[0]!=='+')||(cmode==='tg'&&con[0]!=='@')){err('fCon','eCon',cmode==='ph'?'Введите номер полностью: +7 (9XX) XXX-XX-XX':'Укажите ник Telegram латиницей, например @yana_pro');bad=true}else err('fCon','eCon','');
   if(!bad&&!$('iOk').checked){say('Без согласия на обработку данных запись отправить нельзя');bad=true}
   if(bad)return;const btn=$('send');btn.disabled=true;btn.textContent='Отправляю…';
   const date=ds(selD),time=selT,when=`${DOWF[selD.getDay()]}, ${selD.getDate()} ${MON[selD.getMonth()]}, ${time}`;
@@ -178,8 +188,8 @@ async function send(){const name=$('iName').value.trim().replace(/\s+/g,' '),con
     $('iCom').value='';renderDays();nearest();go('done')}
   catch(e){say('Не получилось отправить. Попробуйте ещё раз.');upd()}}
 
-try{const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;if(u){if(u.username)$('iCon').value='@'+u.username;if(u.first_name&&NAME_RE.test(u.first_name))$('iName').value=u.first_name}}catch(e){}
-load();swipes(true);
+try{const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;if(u){if(u.username)tgNick=u.username;if(u.first_name&&NAME_RE.test(u.first_name))$('iName').value=u.first_name}}catch(e){}
+mode(tgNick?'tg':'ph');load();swipes(true);
 {const h=location.hash.slice(1);if(/^[a-z]+$/.test(h)&&document.getElementById(h)&&document.getElementById(h).classList.contains('v'))go(h);else go('home')}
 </script>
 </body></html>
