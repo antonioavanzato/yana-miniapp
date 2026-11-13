@@ -97,7 +97,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
   <h2>Стоимость<br><em>тренировок</em></h2>
   <p class="lead" id="priceLead">Актуальные цены и абонементы Яна пришлёт в личном сообщении — напишите, какой формат вам интересен.</p>
   <div id="priceList"></div>
-  <div class="go"><button class="btn" onclick="go('book')">Записаться</button><button class="btn o" onclick="ext(TG_YANA)">Узнать цену у Яны</button></div>
+  <div class="go"><button class="btn" onclick="go('book')">Записаться</button><button class="btn o" onclick="tgo(TG_YANA)">Узнать цену у Яны</button></div>
 </section>
 
 <section class="v" id="book">
@@ -106,7 +106,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
   <h2>Выберите день<br>и <em>время</em></h2>
   <div class="days" id="days"></div>
   <div class="lg"><span><i></i>есть окна</span><span><b class="f2">занято</b>всё занято</span><span><b class="z"></b>нет записи</span></div>
-  <div class="cl"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></svg></div><h4>Запись пока <em>закрыта</em></h4><p>На ближайшие три недели свободных окон нет. Напишите Яне — она подберёт время или сообщит, когда откроет новые даты.</p><button class="btn" onclick="ext(TG_YANA)">Написать Яне в Telegram</button><button class="btn o" onclick="ext('https://wa.me/79625615737')">WhatsApp</button></div>
+  <div class="cl"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></svg></div><h4>Запись пока <em>закрыта</em></h4><p>На ближайшие три недели свободных окон нет. Напишите Яне — она подберёт время или сообщит, когда откроет новые даты.</p><button class="btn" onclick="tgo(TG_YANA)">Написать Яне в Telegram</button><button class="btn o" onclick="ext('https://wa.me/79625615737')">WhatsApp</button></div>
   <div class="hs" id="hours"><div class="note">Загружаю расписание…</div></div>
   <div id="form">
   <label class="f" id="fName"><small>Имя</small><input id="iName" maxlength="50" enterkeyhint="next" autocomplete="name" placeholder="Как к вам обращаться"><button type="button" class="clr" tabindex="-1" aria-label="Очистить"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.2 12.8-1.4 1.4L12 13.4l-2.8 2.8-1.4-1.4 2.8-2.8-2.8-2.8 1.4-1.4 2.8 2.8 2.8-2.8 1.4 1.4-2.8 2.8z"/></svg></button></label><div class="err" id="eName"></div>
@@ -129,7 +129,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 <script>
 /* Тот же публичный эндпоинт и ключ, что и в форме booking.yanapro.ru */
 const API_URL="https://functions.yandexcloud.net/d4e9ib1n9r0dpds2hg6t", API_KEY="2b57e7065469136146474ec815375ca3";
-const BOT_LINK="https://t.me/Yanaproru_bot", TG_YANA="https://t.me/+79625615737";
+const BOT_LINK="https://t.me/Yanaproru_bot", TG_YANA="https://t.me/yanaeuphoria";
 const INSTAGRAM="https://www.instagram.com/yana_euphoria";
 const PLACE=encodeURIComponent("DDX UNO, Казань, улица Сибгата Хакима, 62");
 const YMAPS="https://yandex.ru/maps/43/kazan/?text="+PLACE, GIS="https://2gis.ru/kazan/search/"+PLACE;
@@ -144,6 +144,7 @@ function swipes(on){try{if(!tg)return;on?tg.enableVerticalSwipes():tg.disableVer
 function go(id){const back=id==='home'&&cur!=='home'&&cur!=='done';const from=cur;cur=id;hideKb();document.querySelectorAll('.v').forEach(v=>{const on=v.id===id;v.classList.toggle('on',on);v.classList.remove('enter','back','first');if(on&&from!==null){void v.offsetWidth;v.classList.add(back?'back':'enter')}});scrollTo(0,0);try{from!==null&&tg&&tg.HapticFeedback.impactOccurred('light')}catch(e){}
   if(tg){id==='home'||id==='done'?tg.BackButton.hide():tg.BackButton.show()} swipes(id==='home'||id==='done');
   if(id==='book'&&!loaded)load()}
+function tgo(u){if(tg&&tg.openTelegramLink)tg.openTelegramLink(u);else window.open(u,"_blank")}
 function ext(u){if(tg&&tg.openLink)tg.openLink(u);else window.open(u,'_blank')}
 function share(){if(tg&&tg.switchInlineQuery){try{tg.switchInlineQuery('Записаться',['users','groups','channels']);return}catch(e){}}const u='https://t.me/share/url?url='+encodeURIComponent(BOT_LINK)+'&text='+encodeURIComponent('Яна Самойлова — персональный тренер в DDX UNO, Казань. Запись онлайн');if(tg&&tg.openTelegramLink)tg.openTelegramLink(u);else window.open(u,'_blank')}
 /* жест «назад» от левого края на внутренних экранах */
