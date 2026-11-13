@@ -3,11 +3,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Яна Самойлова — тренер</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Rubik:wght@300;400;500&family=Fraunces:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Rubik:wght@300;400;500&family=Fraunces:ital,wght@1,300;1,400&display=block" rel="stylesheet">
 <style>
 :root{--p:#f6f5f2;--k:#111113;--g:#77777c;--s:#e9e7e2;--ln:#d6d3cc;--t:#2a5254;--mint:#eaf3f2;--gold:#b08a4a;--tx:#3d3d40}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--p)}
+html,body{background:var(--p)}body{opacity:0;transition:opacity .25s}body.ready{opacity:1}
 body{color:var(--k);font:400 16px/1.5 Jost,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
 a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .v{display:none;padding:26px 24px 130px;max-width:560px;margin:0 auto}.v.on{display:block}
@@ -61,7 +62,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
   <button class="m" onclick="go('price')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3.5 12.5V5a1.5 1.5 0 0 1 1.5-1.5h7.5l8 8a1.5 1.5 0 0 1 0 2.1l-6.4 6.4a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8.5" cy="8.5" r="1.6"/></svg></span><span class="tx"><b>Цены и абонементы</b><small>Разовые тренировки · пакеты · питание</small></span><svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button>
   <div class="ex">
     <button class="xb" onclick="share()"><svg viewBox="0 0 24 24"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg><span><b>Поделиться</b><small>с другом</small></span></button>
-    <button class="xb" onclick="ext(INSTAGRAM)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg><span><b>Instagram</b><small>Яна в соцсетях</small></span></button>
+    <button class="xb" onclick="ext(INSTAGRAM)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg><span><b>Instagram</b><small>@yana_euphoria</small></span></button>
     <button class="xb" onclick="ext(YMAPS)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><b>Яндекс Карты</b><small>как проехать</small></span></button>
     <button class="xb" onclick="ext(GIS)"><svg viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15m6-12v15"/></svg><span><b>2ГИС</b><small>как проехать</small></span></button>
   </div>
@@ -113,7 +114,7 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 /* Тот же публичный эндпоинт и ключ, что и в форме booking.yanapro.ru */
 const API_URL="https://functions.yandexcloud.net/d4e9ib1n9r0dpds2hg6t", API_KEY="2b57e7065469136146474ec815375ca3";
 const BOT_LINK="https://t.me/Yanaproru_bot", TG_YANA="https://t.me/+79625615737";
-const INSTAGRAM="https://www.instagram.com/"; /* TODO: ник Яны */
+const INSTAGRAM="https://www.instagram.com/yana_euphoria";
 const PLACE=encodeURIComponent("DDX UNO, Казань, улица Сибгата Хакима, 62");
 const YMAPS="https://yandex.ru/maps/43/kazan/?text="+PLACE, GIS="https://2gis.ru/kazan/search/"+PLACE;
 /* Цены: [{t:'Разовая тренировка',d:'60 минут',p:'2 000 ₽'}, …] — экран сам покажет список */
@@ -189,6 +190,7 @@ async function send(){const name=$('iName').value.trim().replace(/\s+/g,' '),con
 
 try{const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;if(u){if(u.username)tgNick=u.username;if(u.first_name&&NAME_RE.test(u.first_name))$('iName').value=u.first_name}}catch(e){}
 mode(tgNick?'tg':'ph');load();swipes(true);
+{const show=()=>document.body.classList.add('ready');(document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]):Promise.resolve()).then(show)}
 {const h=location.hash.slice(1);if(/^[a-z]+$/.test(h)&&document.getElementById(h)&&document.getElementById(h).classList.contains('v'))go(h);else go('home')}
 </script>
 </body></html>
