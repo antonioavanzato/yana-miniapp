@@ -33,6 +33,14 @@ body{color:var(--k);font:400 16px/1.5 Jost,system-ui,sans-serif;-webkit-font-smo
 .xb{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--ln);border-radius:16px;text-align:left}
 .xb:active{background:#eceae5}
 .xb svg{width:22px;height:22px;stroke:var(--k);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}.xb b{display:block;font:400 15px/1.2 Jost}.xb small{display:block;font:300 12px Jost;color:var(--g)}
+.pk{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:18px;margin-top:10px;border:1px solid var(--ln);border-radius:18px;background:#fff;position:relative}.pk:active{transform:scale(.98)}
+.pk .pn{flex:1}.pk b{display:block;font:400 18px Rubik;color:var(--k)}.pk small{font:300 13px Jost;color:var(--g)}.pk .pp{text-align:right;white-space:nowrap}.pk .pp b{font:300 22px Rubik;letter-spacing:-.02em}.pk .pp small{display:block}
+.pk .ar{flex:none;width:34px;height:34px;border-radius:50%;background:var(--k);color:#fff;display:grid;place-items:center}.pk .ar svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.pk.best{background:var(--t);border-color:var(--t)}.pk.best b,.pk.best .pp b{color:#fff}.pk.best small{color:#cfe3e1}.pk.best .ar{background:#fff;color:var(--t)}
+.pk .bd{position:absolute;top:-9px;left:18px;background:var(--gold);color:#fff;font:500 10px Jost;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
+.inc{margin:0;padding:0;list-style:none}.inc li{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--s);font:300 14.5px/1.5 Jost;color:var(--tx)}.inc li:before{content:'';flex:none;width:6px;height:6px;margin-top:8px;border-radius:50%;background:var(--t)}
+details.rl{margin-top:8px;border-top:1px solid var(--s);border-bottom:1px solid var(--s)}details.rl summary{list-style:none;padding:15px 0;display:flex;justify-content:space-between;font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g)}details.rl summary::-webkit-details-marker{display:none}details.rl summary:after{content:'+';font-size:20px;line-height:1;transition:transform .25s}details.rl[open] summary:after{transform:rotate(45deg)}details.rl .inc{padding-bottom:10px}
+.selp{display:none;align-items:center;gap:10px;margin:14px 0 4px;padding:12px 14px;border-radius:14px;background:var(--mint);font:400 14px Jost;color:var(--t)}.selp.on{display:flex}.selp span{flex:1}.selp button{width:26px;height:26px;border-radius:50%;background:rgba(42,82,84,.12);color:var(--t);font-size:16px;line-height:1}
 .top{font:500 10.5px Jost;letter-spacing:.28em;text-transform:uppercase;color:var(--g)}
 h2{font:300 36px/.98 Rubik;letter-spacing:-.04em;margin:10px 0 22px}
 h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin:30px 0 6px}
@@ -94,16 +102,28 @@ h3{font:400 13px Jost;letter-spacing:.2em;text-transform:uppercase;color:var(--g
 <section class="v" id="price">
   <button class="bk" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Назад</button>
   <div class="top">Цены и абонементы</div>
-  <h2>Стоимость<br><em>тренировок</em></h2>
-  <p class="lead" id="priceLead">Актуальные цены и абонементы Яна пришлёт в личном сообщении — напишите, какой формат вам интересен.</p>
+  <h2>Персональные<br><em>тренировки</em></h2>
+  <p class="lead">Выберите формат — сразу перейдёте к выбору дня и времени.</p>
   <div id="priceList"></div>
-  <div class="go"><button class="btn" onclick="go('book')">Записаться</button><button class="btn o" onclick="tgo(TG_YANA)">Узнать цену у Яны</button></div>
+  <h3>Что входит</h3>
+  <ul class="inc"><li>Индивидуальная программа под ваши цели</li><li>Полный контроль тренера всё занятие — 55 минут</li><li>Постановка техники и коррекция упражнений</li><li>Рекомендации по восстановлению и режиму дня</li><li>Связь с Яной в Telegram по вопросам программы</li></ul>
+  <details class="rl"><summary>Условия</summary><ul class="inc">
+    <li>Срок действия пакетов: 5 тренировок — 30 дней, 10 тренировок — 45 дней.</li>
+    <li>Запись на тренировку обязательна и производится заранее.</li>
+    <li>Отмена или перенос — не позднее чем за 6 часов до начала. Иначе тренировка считается проведённой и списывается из пакета.</li>
+    <li>Перерасчёт возможен только в период действия пакета, по стоимости разового занятия.</li>
+    <li>Тренировки, не использованные за срок действия пакета, сгорают.</li>
+    <li>Разовые тренировки бронируются только при 100% предоплате.</li>
+    <li>Заморозка пакета не предусмотрена.</li>
+    <li>Оплата пакета или разового занятия означает согласие с этими условиями.</li></ul></details>
+  <div class="go"><button class="btn o" style="margin-top:0" onclick="tgo(TG_YANA)">Задать вопрос Яне</button></div>
 </section>
 
 <section class="v" id="book">
   <button class="bk" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Назад</button>
   <div class="top">Запись на тренировку</div>
   <h2>Выберите день<br>и <em>время</em></h2>
+  <div class="selp" id="selp"><span id="selpT"></span><button type="button" aria-label="Убрать" onclick="pickPkg(-1)">×</button></div>
   <div class="days" id="days"></div>
   <div class="lg"><span><i></i>есть окна</span><span><b class="f2">занято</b>всё занято</span><span><b class="z"></b>нет записи</span></div>
   <div class="cl"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></svg></div><h4>Запись пока <em>закрыта</em></h4><p>На ближайшие три недели свободных окон нет. Напишите Яне — она подберёт время или сообщит, когда откроет новые даты.</p><button class="btn" onclick="tgo(TG_YANA)">Написать Яне в Telegram</button><button class="btn o" onclick="ext('https://wa.me/79625615737')">WhatsApp</button></div>
@@ -134,7 +154,7 @@ const INSTAGRAM="https://www.instagram.com/yana_euphoria";
 const PLACE=encodeURIComponent("DDX UNO, Казань, улица Сибгата Хакима, 62");
 const YMAPS="https://yandex.ru/maps/43/kazan/?text="+PLACE, GIS="https://2gis.ru/kazan/search/"+PLACE;
 /* Цены: [{t:'Разовая тренировка',d:'60 минут',p:'2 000 ₽'}, …] — экран сам покажет список */
-const PRICES=[];
+const PRICES=[{t:'Разовое занятие',d:'55 минут',p:'3 000 ₽'},{t:'5 тренировок',d:'30 дней · по 2 800 ₽',p:'14 000 ₽'},{t:'10 тренировок',d:'45 дней · по 2 600 ₽',p:'26 000 ₽',best:1}];let PKG=-1;
 
 const tg=window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData!==undefined?Telegram.WebApp:null; let cur=null, icsUrl='';
 if(tg){tg.ready();tg.expand();try{tg.setHeaderColor('#f6f5f2');tg.setBackgroundColor('#f6f5f2');tg.setBottomBarColor&&tg.setBottomBarColor('#f6f5f2')}catch(e){}
@@ -151,8 +171,10 @@ function share(){if(tg&&tg.switchInlineQuery){try{tg.switchInlineQuery('Запи
 (function(){let x0=null,y0=0;addEventListener('touchstart',e=>{const t=e.touches[0];x0=(cur!=='home'&&cur!=='done'&&t.clientX<28)?t.clientX:null;y0=t.clientY},{passive:true});
   addEventListener('touchend',e=>{if(x0===null)return;const t=e.changedTouches[0];if(t.clientX-x0>70&&Math.abs(t.clientY-y0)<60)go('home');x0=null},{passive:true})})();
 
-if(PRICES.length){$('priceLead').textContent='Тренировки проходят в DDX UNO, ул. Сибгата Хакима, 62.';
-  $('priceList').innerHTML=PRICES.map(x=>`<div class="pr"><div><b>${x.t}</b><p>${x.d||''}</p></div><span>${x.p}</span></div>`).join('')}
+$('priceList').innerHTML=PRICES.map((x,i)=>`<button type="button" class="pk${x.best?' best':''}" onclick="pickPkg(${i},1)">${x.best?'<span class="bd">Выгоднее</span>':''}<span class="pn"><b>${x.t}</b><small>${x.d}</small></span><span class="pp"><b>${x.p}</b></span><span class="ar"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>`).join('');
+/* Выбор пакета: сразу к записи, пакет показан плашкой и уходит в комментарий заявки */
+function pickPkg(i,goNow){PKG=i;const x=PRICES[i];$('selp').classList.toggle('on',i>=0);if(x)$('selpT').textContent='Выбрано: '+x.t+' · '+x.p;if(goNow)go('book')}
+const pkgNote=()=>PRICES[PKG]?'Формат: '+PRICES[PKG].t+' — '+PRICES[PKG].p:'';
 
 /* ── запись: правила те же, что на сайте и сервере ── */
 const NAME_RE=/^[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё '\-]{1,49}$/, TG_RE=/^[A-Za-z][A-Za-z0-9_]{4,31}$/;
@@ -206,13 +228,13 @@ async function send(){const name=$('iName').value.trim().replace(/\s+/g,' '),con
   if(!bad&&!$('iOk').checked){say('Без согласия на обработку данных запись отправить нельзя');bad=true}
   if(bad)return;const btn=$('send');btn.disabled=true;btn.textContent='Отправляю…';
   const date=ds(selD),time=selT,when=`${DOWF[selD.getDay()]}, ${selD.getDate()} ${MON[selD.getMonth()]}, ${time}`;
-  try{const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone:con,comment:$('iCom').value.trim(),date,time,consent:true,key:API_KEY})});
+  try{const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone:con,comment:[pkgNote(),$('iCom').value.trim()].filter(Boolean).join('. ').slice(0,500),date,time,consent:true,key:API_KEY})});
     if(r.status===409){busy.add(date+'|'+time);say('Это время только что заняли. Выберите другое.');renderDays();return}
     if(!r.ok){const j=await r.json().catch(()=>({}));if(j.error==='bad_name')err('fName','eName','Проверьте имя');else if(j.error==='bad_contact')err('fCon','eCon','Проверьте Telegram или номер');else throw 0;upd();return}
     busy.add(date+'|'+time);icsUrl=`${API_URL}?action=ics&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`;
     $('doneWhen').textContent=when;
     try{tg&&tg.HapticFeedback.notificationOccurred('success')}catch(e){}
-    $('iCom').value='';renderDays();nearest();go('done')}
+    $('iCom').value='';pickPkg(-1);renderDays();nearest();go('done')}
   catch(e){say('Не получилось отправить. Попробуйте ещё раз.');upd()}}
 
 try{const u=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;if(u){if(u.username)tgNick=u.username;if(u.first_name&&NAME_RE.test(u.first_name))$('iName').value=u.first_name}}catch(e){}
